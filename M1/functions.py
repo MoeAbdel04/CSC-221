@@ -1,21 +1,18 @@
-# M1Lab_Debug.py
+def dis_score(score):
+    """
+    Tell user if they passed or failed
+    """
+    if score >= 80:
+        print("Your score is", score)
+        print("You Passed!")
+    else:
+        print("Your score is", score)
+        print("Your score is below 80!!!")
+        print("You didn't pass the exam")
 
-from quiz_module import menu, start_program
+def menu():
+    print('-' * 10 + 'MENU' + '-' * 10)
+    print('1) Run Program')
+    print('2) Exit')
+    print('-' * 24)
 
-def main():
-    choice = 0
-
-    while choice != 2:
-        menu()
-        choice = int(input('Enter your choice: '))
-
-        if choice == 1:
-            start_program()
-        elif choice == 2:
-            print('\nTerminate Program....')
-        else:
-            print('INVALID Entry!!!!')
-            print('Enter a valid choice')
-
-if __name__ == "__main__":
-    main()
