@@ -110,7 +110,7 @@ def main():
     print(merged_df)
 
     # Save the updated DataFrame to a CSV file in the current directory
-    output_file = 'updated_contacts_with_tess.csv'
+    output_file = 'updated_contacts.csv'
     merged_df.to_csv(output_file, index=False)
     print(f"\nFinal merged DataFrame saved to {output_file}")
 
