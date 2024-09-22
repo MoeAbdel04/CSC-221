@@ -5,6 +5,67 @@
 
 
 
+
+# Pseudocode for the Binary-Decimal Conversion Program
+
+# Import necessary libraries
+# - random: For generating random numbers
+# - pandas: For managing data and storing guesses in DataFrames
+
+# Initialize two empty DataFrames to store results:
+# - decimal_guess_df: For storing results of the binary-to-decimal guesses
+# - binary_guess_df: For storing results of the decimal-to-binary guesses
+
+# Function: binary_to_decimal()
+#     1. Generate a random decimal number between 0 and 255
+#     2. Convert the random decimal number to an 8-bit binary string
+#     3. Display the generated binary number
+#     4. Ask the user to guess the corresponding decimal value
+#     5. Check if the user's guess is correct:
+#         - If correct, display a success message
+#         - If wrong, display the correct answer
+#     6. Store the generated binary, correct decimal value, and the result (Correct/Wrong) in decimal_guess_df
+#     7. Display a submenu:
+#         - Option 1: Reset the game (generate another random binary number)
+#         - Option 2: Return to the main menu
+
+# Function: decimal_to_binary()
+#     1. Generate a random decimal number between 0 and 255
+#     2. Convert the random decimal number to an 8-bit binary string
+#     3. Display the generated decimal number
+#     4. Ask the user to guess the corresponding binary value
+#     5. Check if the user's guess is correct:
+#         - If correct, display a success message
+#         - If wrong, display the correct answer
+#     6. Store the generated decimal, correct binary value, and the result (Correct/Wrong) in binary_guess_df
+#     7. Display a submenu:
+#         - Option 1: Reset the game (generate another random decimal number)
+#         - Option 2: Return to the main menu
+
+# Function: save_results()
+#     1. Write the decimal_guess_df DataFrame to a CSV file named 'decimal_guess.csv'
+#     2. Write the binary_guess_df DataFrame to a CSV file named 'binary_guess.csv'
+#     3. Notify the user that the results have been saved
+
+# Function: main_menu()
+#     1. Display the main menu with the following options:
+#         - Option 1: Binary to Decimal Conversion
+#         - Option 2: Decimal to Binary Conversion
+#         - Option 9: Exit the program
+#     2. Based on the user's choice, call the corresponding function:
+#         - If the user chooses Option 1, call binary_to_decimal()
+#         - If the user chooses Option 2, call decimal_to_binary()
+#         - If the user chooses Option 9, call save_results() and exit the program
+#     3. If the user makes an invalid choice, notify them and display the menu again
+
+# Main Program Execution:
+#     - Call main_menu() to start the program
+
+
+
+
+
+
 import random
 import pandas as pd
 
