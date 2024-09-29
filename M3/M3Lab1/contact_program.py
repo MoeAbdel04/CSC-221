@@ -1,32 +1,17 @@
-
-
-
-
-
-
 import con_func as fn
 from m2Lab_classes import Customer
 import pandas as pd
 import csv
-import os
 
 # Load the base CSV data into customers list
 def load_customers_from_csv():
     customers = []
-    try:
-        # Ensure the file path is correct
-        if not os.path.exists('customer(1).csv'):
-            raise FileNotFoundError("The file 'customer(1).csv' was not found.")
-        
-        # Read CSV file and create Customer instances
-        df = pd.read_csv('customer(1).csv')
-        for _, row in df.iterrows():
-            customer = Customer(row['first'], row['last'], row['phone'], row['email'], row['state'], row['address'])
-            customers.append(customer)
-    except FileNotFoundError as e:
-        print(e)
+    # Read CSV file and create Customer instances
+    df = pd.read_csv('customer(1).csv')  # Ensure this file is in the same directory
+    for _, row in df.iterrows():
+        customer = Customer(row['first'], row['last'], row['phone'], row['email'], row['state'], row['address'])
+        customers.append(customer)
     return customers
-
 
 # Save updated customers to a new CSV file
 def save_to_csv(customers):
@@ -57,7 +42,7 @@ def main():
                 print(f'{"First Name":<20}{"Last Name":<20}{"Phone":<20}{"Email":<30}{"Address":<30}{"State":<10}')
                 print("-" * 130)
                 for cus in customers:
-                    print(cus)  # This uses the __repr__ method from Customer class
+                    print(f'{cus.get_first():<20}{cus.get_last():<20}{cus.get_phone():<20}{cus.get_email():<30}{cus.get_address():<30}{cus.get_state():<10}')
             else:
                 print("No customer data available.")
         
