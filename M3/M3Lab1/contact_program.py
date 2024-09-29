@@ -7,7 +7,7 @@ import os
 # Load the base CSV data into customers list
 def load_customers_from_csv():
     customers = []
-    csv_file = 'customer(1).csv'  # Default file name
+    csv_file = 'customer1.csv'  # Default file name
 
     # Check if the file exists
     if not os.path.exists(csv_file):
