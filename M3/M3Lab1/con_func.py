@@ -9,13 +9,15 @@ from m2Lab_classes import Customer
 import csv
 
 def menu():
-    # Display the header
-    print("Menu")
-    print("----------------")
-    print("1. Display Customer Dataset"
-          + "\\n2. Add Customer"
-          + "\\n3. Update Customer Info"
-          + "\\n4. Exit Program and Generate Customer Files")
+    print("=" * 40)
+    print("       Customer Management System")
+    print("=" * 40)
+    print("1. Display Customer Dataset")
+    print("2. Add Customer")
+    print("3. Update Customer Info")
+    print("4. Exit Program and Generate Customer Files")
+    print("=" * 40)
+
 
 def get_cusInfo():
     '''
