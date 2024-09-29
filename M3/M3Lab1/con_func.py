@@ -30,7 +30,7 @@ def get_cusInfo():
     customers = []
 
     try:
-        with open('customer1.csv', newline='') as customer_file:  # Updated file path
+        with open('customer1.csv', newline='') as customer_file:  
             reader = csv.reader(customer_file)
             next(reader)  # Skip header row
 
