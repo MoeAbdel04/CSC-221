@@ -2,16 +2,28 @@ import con_func as fn
 from m2Lab_classes import Customer
 import pandas as pd
 import csv
+import os
 
 # Load the base CSV data into customers list
 def load_customers_from_csv():
     customers = []
-    # Read CSV file and create Customer instances
-    df = pd.read_csv('customer(1).csv')  # Ensure this file is in the same directory
-    for _, row in df.iterrows():
-        customer = Customer(row['first'], row['last'], row['phone'], row['email'], row['state'], row['address'])
-        customers.append(customer)
-    return customers
+    csv_file = 'customer(1).csv'  # Default file name
+
+    # Check if the file exists
+    if not os.path.exists(csv_file):
+        print(f"File '{csv_file}' not found. Please enter the correct file path:")
+        csv_file = input("Enter the full path to the CSV file: ")
+
+    try:
+        # Read CSV file and create Customer instances
+        df = pd.read_csv(csv_file)
+        for _, row in df.iterrows():
+            customer = Customer(row['first'], row['last'], row['phone'], row['email'], row['state'], row['address'])
+            customers.append(customer)
+        return customers
+    except FileNotFoundError:
+        print(f"The file '{csv_file}' was not found.")
+        return []
 
 # Save updated customers to a new CSV file
 def save_to_csv(customers):
