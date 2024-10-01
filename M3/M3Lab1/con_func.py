@@ -4,11 +4,13 @@
 
 
 
-# -*- coding: utf-8 -*-
+
+
 from m2Lab_classes import Customer
 import csv
 
 def menu():
+    # Display the header
     print("=" * 40)
     print("       Customer Management System")
     print("=" * 40)
@@ -17,7 +19,6 @@ def menu():
     print("3. Update Customer Info")
     print("4. Exit Program and Generate Customer Files")
     print("=" * 40)
-
 
 def get_cusInfo():
     '''
@@ -29,7 +30,7 @@ def get_cusInfo():
     customers = []
 
     try:
-        with open('customer(1).csv', newline='') as customer_file:  # Updated file path
+        with open('customer1.csv', newline='') as customer_file:  
             reader = csv.reader(customer_file)
             next(reader)  # Skip header row
 
