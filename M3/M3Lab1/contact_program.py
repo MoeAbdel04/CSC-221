@@ -13,7 +13,6 @@ import pandas as pd
 import csv
 import os
 
-# merge - used latest version
 # Load the base CSV data into customers list
 def load_customers_from_csv():
     customers = []
