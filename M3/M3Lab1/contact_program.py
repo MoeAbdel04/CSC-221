@@ -6,14 +6,13 @@
 
 
 
-
+#saved
 import con_func as fn
 from m2Lab_classes import Customer
 import pandas as pd
 import csv
 import os
 
-# merge - used latest version
 # Load the base CSV data into customers list
 def load_customers_from_csv():
     customers = []
