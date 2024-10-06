@@ -11,20 +11,28 @@ class Game:
         self.current_room = 0
 
     def start_game(self):
-        print("Welcome to the land of knights and dragons!")
-        name = input("Enter your knight's name: ")
+        self.display_banner("Welcome to the land of knights and dragons!")
+        name = input("Enter your knight's name: ").strip()
         self.player = Player(name)
-        print(f"{self.player.name}, your journey begins now!")
+        print(f"\n{'*' * 50}")
+        print(f"{self.player.name}, YOUR JOURNEY BEGINS NOW!")
+        print(f"{'*' * 50}\n")
 
         while self.player.is_alive() and self.current_room < len(self.rooms):
             self.move()
 
         if self.player.is_alive():
-            print("You have reached the final challenge, the Ancient Dragon!")
+            print(f"\n{'=' * 50}")
+            print(f"YOU HAVE REACHED THE FINAL CHALLENGE, THE ANCIENT DRAGON!")
+            print(f"{'=' * 50}\n")
             dragon = Dragon()
             self.combat(dragon)
+
+            if self.player.is_alive():
+                self.end_game()
         else:
-            print("You have fallen in battle.")
+            self.display_banner("You have fallen in battle.")
+            print("GAME OVER")
 
     def move(self):
         print("\nYou are in a mysterious land. Choose a direction to move (north, south, east, west):")
@@ -32,6 +40,7 @@ class Game:
         self.current_room += 1
         room_content = random.choice(self.rooms)
 
+        print(f"\n{'-' * 50}")
         if room_content == 'Enemy':
             print("An enemy appears!")
             enemy = random.choice([Enemy(), Skeleton()])
@@ -53,8 +62,10 @@ class Game:
             treasure_room.give_treasure(self.player)
         else:
             print("The room is empty.")
+        print(f"{'-' * 50}\n")
 
     def combat(self, enemy):
+        self.display_banner(f"Combat against {enemy.name}!")
         while self.player.is_alive() and enemy.is_alive():
             print(f"\n{self.player.name}'s Health: {self.player.health}")
             print(f"Enemy {enemy.name}'s Health: {enemy.health}")
@@ -70,10 +81,28 @@ class Game:
                 self.player.use_skill(enemy)
 
         if not enemy.is_alive():
-            print(f"You have defeated {enemy.name}!")
+            print(f"\n{'*' * 50}")
+            print(f"YOU HAVE DEFEATED {enemy.name.upper()}!")
+            print(f"{'*' * 50}\n")
             self.player.gain_experience(enemy.exp_reward)
         if not self.player.is_alive():
-            print("You have been defeated.")
+            self.display_banner("You have been defeated.")
+
+    def end_game(self):
+        """Display the ending message when the game is won."""
+        print(f"\n{'=' * 50}")
+        print(f"CONGRATULATIONS, {self.player.name.upper()}!")
+        print(f"{'=' * 50}\n")
+        print("YOU HAVE DEFEATED THE ANCIENT DRAGON AND RESTORED PEACE TO THE KINGDOM.")
+        print("THE PEOPLE WILL SING SONGS OF YOUR HEROIC DEEDS FOR GENERATIONS TO COME!")
+        print("THANK YOU FOR PLAYING!")
+        print(f"\n{'=' * 50}")
+
+    def display_banner(self, message):
+        """Utility function to display a banner message."""
+        print(f"\n{'=' * 50}")
+        print(f"{message.center(50)}")
+        print(f"{'=' * 50}\n")
 
 if __name__ == "__main__":
     game = Game()
