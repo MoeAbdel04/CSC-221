@@ -9,6 +9,7 @@ class Game:
         self.rooms = ['Empty', 'Enemy', 'Item', 'Healing Fountain', 'Trap', 'Treasure Room', 'Enemy']
         self.boss_room = 'Dragon'
         self.current_room = 0
+        self.enemies_defeated = 0  # Track the number of enemies defeated
 
     def start_game(self):
         self.display_banner("Welcome to the land of knights and dragons!")
@@ -21,7 +22,7 @@ class Game:
         while self.player.is_alive() and self.current_room < len(self.rooms):
             self.move()
 
-        if self.player.is_alive():
+        if self.player.is_alive() and self.enemies_defeated >= 2:
             print(f"\n{'=' * 50}")
             print(f"YOU HAVE REACHED THE FINAL CHALLENGE, THE ANCIENT DRAGON!")
             print(f"{'=' * 50}\n")
@@ -30,6 +31,9 @@ class Game:
 
             if self.player.is_alive():
                 self.end_game()
+        elif self.player.is_alive():
+            print("\nYou sense that you are not yet prepared to face the Ancient Dragon.")
+            print("Defeat at least 2 enemies before you may proceed.")
         else:
             self.display_banner("You have fallen in battle.")
             print("GAME OVER")
@@ -85,6 +89,7 @@ class Game:
             print(f"YOU HAVE DEFEATED {enemy.name.upper()}!")
             print(f"{'*' * 50}\n")
             self.player.gain_experience(enemy.exp_reward)
+            self.enemies_defeated += 1  # Increment enemy defeat count
         if not self.player.is_alive():
             self.display_banner("You have been defeated.")
 
