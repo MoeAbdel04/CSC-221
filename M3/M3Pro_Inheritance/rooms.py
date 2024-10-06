@@ -1,3 +1,5 @@
+from items import Weapon  # Import Weapon from items
+
 class HealingFountain:
     def use(self, player):
         player.health = 100
@@ -11,5 +13,6 @@ class Trap:
 
 class TreasureRoom:
     def give_treasure(self, player):
+        # Ensure Weapon is properly referenced here
         player.add_item(Weapon())
         print("You have found a rare weapon!")
