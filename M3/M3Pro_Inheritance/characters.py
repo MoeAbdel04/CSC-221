@@ -24,7 +24,7 @@ class Player(Character):
         self.experience = 0
         self.level = 1
         self.inventory = []
-        self.skills = ['Power Strike']
+        self.skills = ['Power Strike']  # Added Power Strike as a skill
 
     def gain_experience(self, exp):
         self.experience += exp
@@ -50,13 +50,16 @@ class Player(Character):
         print("Inventory:")
         for idx, item in enumerate(self.inventory):
             print(f"{idx + 1}. {item.name}")
-        choice = int(input("Choose an item to use: ")) - 1
+        try:
+            choice = int(input("Choose an item to use: ")) - 1
 
-        if 0 <= choice < len(self.inventory):
-            item = self.inventory.pop(choice)
-            item.use(self)
-        else:
-            print("Invalid choice.")
+            if 0 <= choice < len(self.inventory):
+                item = self.inventory.pop(choice)
+                item.use(self)
+            else:
+                print("Invalid choice.")
+        except (IndexError, ValueError):
+            print("Invalid input. Please select a valid item number.")
 
     def use_skill(self, enemy):
         if not self.skills:
@@ -66,15 +69,18 @@ class Player(Character):
         print("Skills:")
         for idx, skill in enumerate(self.skills):
             print(f"{idx + 1}. {skill}")
-        choice = int(input("Choose a skill to use: ")) - 1
+        try:
+            choice = int(input("Choose a skill to use (enter the number): ")) - 1
 
-        if choice == 0:
-            # Power Strike deals double damage
-            damage = self.attack_power * 2
-            print(f"{self.name} uses Power Strike for {damage} damage!")
-            enemy.take_damage(damage)
-        else:
-            print("Invalid skill.")
+            if choice == 0 and self.skills[choice] == 'Power Strike':
+                # Power Strike deals double damage
+                damage = self.attack_power * 2
+                print(f"{self.name} uses Power Strike for {damage} damage!")
+                enemy.take_damage(damage)
+            else:
+                print("Invalid skill or choice.")
+        except (IndexError, ValueError):
+            print("Invalid input. Please select a valid skill number.")
 
 class Enemy(Character):
     def __init__(self):
