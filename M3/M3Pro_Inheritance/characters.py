@@ -1,60 +1,93 @@
 import random
 
 class Character:
+    """
+    Base Character class for all characters in the game.
+    """
     def __init__(self, name, health, attack_power):
-        self.name = name
-        self.health = health
-        self.attack_power = attack_power
+        self._name = name
+        self._health = health
+        self._attack_power = attack_power
 
     def attack(self, target):
-        damage = random.randint(1, self.attack_power)
-        print(f"{self.name} attacks {target.name} for {damage} damage!")
+        """
+        Method for attacking a target character.
+        """
+        damage = random.randint(1, self._attack_power)
+        print(f"{self._name} attacks {target._name} for {damage} damage!")
         target.take_damage(damage)
 
     def take_damage(self, damage):
-        self.health -= damage
-        print(f"{self.name} takes {damage} damage!")
+        """
+        Method for taking damage from an attack.
+        """
+        self._health -= damage
+        print(f"{self._name} takes {damage} damage!")
 
     def is_alive(self):
-        return self.health > 0
+        """
+        Checks if the character is still alive.
+        """
+        return self._health > 0
+
+    def display_stats(self):
+        """
+        Displays character stats: name, health, and attack power.
+        """
+        print(f"{self._name} - Health: {self._health}, Attack Power: {self._attack_power}")
+
 
 class Player(Character):
+    """
+    Player class inheriting from Character with unique attributes like experience and level.
+    """
     def __init__(self, name):
         super().__init__(name, 100, 10)
-        self.experience = 0
-        self.level = 1
-        self.inventory = []
-        self.skills = ['Power Strike']  # Added Power Strike as a skill
+        self._experience = 0
+        self._level = 1
+        self._inventory = []
+        self._skills = ['Power Strike']
 
     def gain_experience(self, exp):
-        self.experience += exp
-        print(f"{self.name} gains {exp} experience points!")
-        if self.experience >= self.level * 10:
+        """
+        Adds experience points and levels up if threshold is reached.
+        """
+        self._experience += exp
+        print(f"{self._name} gains {exp} experience points!")
+        if self._experience >= self._level * 10:
             self.level_up()
 
     def level_up(self):
-        self.level += 1
-        self.health += 20
-        self.attack_power += 5
-        print(f"{self.name} has leveled up to level {self.level}!")
+        """
+        Increases level, health, and attack power upon leveling up.
+        """
+        self._level += 1
+        self._health += 20
+        self._attack_power += 5
+        print(f"{self._name} has leveled up to level {self._level}!")
 
     def add_item(self, item):
-        self.inventory.append(item)
-        print(f"{self.name} picked up a {item.name}.")
+        """
+        Adds an item to the player's inventory.
+        """
+        self._inventory.append(item)
+        print(f"{self._name} picked up a {item.name}.")
 
     def use_item(self):
-        if not self.inventory:
+        """
+        Allows the player to use an item from the inventory.
+        """
+        if not self._inventory:
             print("You have no items to use!")
             return
 
         print("Inventory:")
-        for idx, item in enumerate(self.inventory):
+        for idx, item in enumerate(self._inventory):
             print(f"{idx + 1}. {item.name}")
         try:
             choice = int(input("Choose an item to use: ")) - 1
-
-            if 0 <= choice < len(self.inventory):
-                item = self.inventory.pop(choice)
+            if 0 <= choice < len(self._inventory):
+                item = self._inventory.pop(choice)
                 item.use(self)
             else:
                 print("Invalid choice.")
@@ -62,37 +95,66 @@ class Player(Character):
             print("Invalid input. Please select a valid item number.")
 
     def use_skill(self, enemy):
-        if not self.skills:
+        """
+        Allows the player to use a skill in combat.
+        """
+        if not self._skills:
             print("You have no skills!")
             return
 
         print("Skills:")
-        for idx, skill in enumerate(self.skills):
+        for idx, skill in enumerate(self._skills):
             print(f"{idx + 1}. {skill}")
         try:
-            choice = int(input("Choose a skill to use (enter the number): ")) - 1
+            choice = int(input("Choose a skill to use: ")) - 1
 
-            if choice == 0 and self.skills[choice] == 'Power Strike':
+            if choice == 0 and self._skills[choice] == 'Power Strike':
                 # Power Strike deals double damage
-                damage = self.attack_power * 2
-                print(f"{self.name} uses Power Strike for {damage} damage!")
+                damage = self._attack_power * 2
+                print(f"{self._name} uses Power Strike for {damage} damage!")
                 enemy.take_damage(damage)
             else:
                 print("Invalid skill or choice.")
         except (IndexError, ValueError):
             print("Invalid input. Please select a valid skill number.")
 
+
 class Enemy(Character):
-    def __init__(self):
-        super().__init__('Goblin', 30, 5)
-        self.exp_reward = 5
+    """
+    Base class for enemies, inheriting from Character.
+    """
+    def __init__(self, name, health, attack_power, exp_reward, loot):
+        super().__init__(name, health, attack_power)
+        self._exp_reward = exp_reward
+        self._loot = loot
 
-class Skeleton(Character):
-    def __init__(self):
-        super().__init__('Skeleton', 40, 7)
-        self.exp_reward = 7
+    def drop_loot(self):
+        """
+        Drops loot upon defeat.
+        """
+        print(f"{self._name} dropped {self._loot}!")
+        return self._loot
 
-class Dragon(Character):
+
+class Goblin(Enemy):
+    """
+    Goblin enemy subclass inheriting from Enemy.
+    """
     def __init__(self):
-        super().__init__('Ancient Dragon', 200, 20)
-        self.exp_reward = 100
+        super().__init__('Goblin', 30, 5, 5, 'Small Potion')
+
+
+class Orc(Enemy):
+    """
+    Orc enemy subclass inheriting from Enemy.
+    """
+    def __init__(self):
+        super().__init__('Orc', 50, 7, 8, 'Battle Axe')
+
+
+class Dragon(Enemy):
+    """
+    Dragon enemy subclass, serving as the final boss.
+    """
+    def __init__(self):
+        super().__init__('Dragon', 200, 20, 100, 'Ancient Dragon Scale')
