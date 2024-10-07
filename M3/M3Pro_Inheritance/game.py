@@ -1,5 +1,5 @@
 import random
-from characters import Player, Enemy, Skeleton, Dragon
+from characters import Player, Enemy, Orc, Dragon
 from items import Potion, Weapon, Armor, Shield
 from rooms import HealingFountain, Trap, TreasureRoom
 
