@@ -1,5 +1,5 @@
 import random
-from data import decimal_guess_df, binary_guess_df
+from data import binary_guess_df, decimal_guess_df
 import pandas as pd
 
 def binary_to_decimal():
@@ -17,13 +17,19 @@ def binary_to_decimal():
         print(f"Wrong! The correct decimal value was {random_decimal}")
         result = "Wrong"
     
-    # Add to DataFrame
+    # Add to DataFrame and print the updated DataFrame
     global decimal_guess_df
-    decimal_guess_df = pd.concat([decimal_guess_df, pd.DataFrame([{
+    new_row = pd.DataFrame([{
         "Random Binary": random_binary, 
         "Correct Decimal": random_decimal, 
         "Result": result
-    }])], ignore_index=True)
+    }])
+    
+    decimal_guess_df = pd.concat([decimal_guess_df, new_row], ignore_index=True)
+    
+    # Print the DataFrame after the update
+    print("\nUpdated decimal_guess_df:")
+    print(decimal_guess_df)
 
     # Submenu
     print("\n1) Reset (generate another random binary)")
@@ -48,13 +54,19 @@ def decimal_to_binary():
         print(f"Wrong! The correct binary value was {correct_binary}")
         result = "Wrong"
     
-    # Add to DataFrame
+    # Add to DataFrame and print the updated DataFrame
     global binary_guess_df
-    binary_guess_df = pd.concat([binary_guess_df, pd.DataFrame([{
+    new_row = pd.DataFrame([{
         "Random Decimal": random_decimal, 
         "Correct Binary": correct_binary, 
         "Result": result
-    }])], ignore_index=True)
+    }])
+    
+    binary_guess_df = pd.concat([binary_guess_df, new_row], ignore_index=True)
+    
+    # Print the DataFrame after the update
+    print("\nUpdated binary_guess_df:")
+    print(binary_guess_df)
 
     # Submenu
     print("\n1) Reset (generate another random decimal)")
