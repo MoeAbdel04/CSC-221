@@ -1,2 +1,3 @@
 Question,Correct Answer,User Answer,Result
-"What is the wildcard mask (WCM)? (IP: 10.0.0.0, Subnet Mask: 255.255.240.0)",0.0.15.255,33,Incorrect
+"What is the wildcard mask (WCM)? (IP: 10.0.0.0, Subnet Mask: 255.255.240.0)",0.0.15.255,22,Incorrect
+"What is the network class and leading bit pattern (separate by /)? (IP: 172.16.0.0, Subnet Mask: 255.255.0.0)",B / 10,B / 10,Correct

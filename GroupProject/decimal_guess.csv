@@ -1,2 +1,3 @@
 Random Binary,Correct Decimal,Result
-10100000,160,Wrong
+10100111,167,Correct
+11110011,243,Wrong
