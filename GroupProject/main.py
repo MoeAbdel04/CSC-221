@@ -20,6 +20,7 @@ def main_menu():
         elif choice == "3":
             subnet_question()
         elif choice == "9":
+            # Save results before exiting
             save_results()
             print("Thank you for using the program!")
             break
