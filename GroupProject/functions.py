@@ -81,16 +81,17 @@ def ask_subnet_question():
     question = random_question["question"]
     correct_answer = random_question["answer"]
     
-    print(f"\nSubnet Address: {ip_address}/{subnet_mask}")
+    print("\n===============================")
+    print(f"Subnet Address: {ip_address}/{subnet_mask}")
     print(f"Question: {question}")
     
     user_answer = input("Your answer: ")
     
     if user_answer == correct_answer:
-        print("Correct!")
+        print("\nCorrect! ✅")
         result = "Correct"
     else:
-        print(f"Incorrect! The correct answer is {correct_answer}")
+        print(f"\nIncorrect! ❌ The correct answer is {correct_answer}")
         result = "Incorrect"
     
     # Add to DataFrame
@@ -105,6 +106,7 @@ def ask_subnet_question():
     # Submenu
     print("\n1) Reset (ask another subnet question)")
     print("2) Back to main menu")
+    print("===============================")
     choice = input("Enter your choice: ")
     
     if choice == "1":
@@ -119,15 +121,16 @@ def binary_to_decimal():
     """
     random_decimal = random.randint(0, 255)
     random_binary = format(random_decimal, '08b')
-    print(f"\nRandom Binary: {random_binary}")
+    print("\n===============================")
+    print(f"Random Binary: {random_binary}")
     
     user_guess = input("Enter the Decimal value of the binary number: ")
     
     if int(user_guess) == random_decimal:
-        print("Correct! The binary was indeed", random_binary)
+        print("\nCorrect! ✅")
         result = "Correct"
     else:
-        print(f"Wrong! The correct decimal value was {random_decimal}")
+        print(f"\nIncorrect! ❌ The correct decimal value was {random_decimal}")
         result = "Wrong"
     
     # Add to DataFrame
@@ -141,6 +144,7 @@ def binary_to_decimal():
     # Submenu
     print("\n1) Reset (generate another random binary)")
     print("2) Back to main menu")
+    print("===============================")
     choice = input("Enter your choice: ")
     
     if choice == "1":
@@ -155,15 +159,16 @@ def decimal_to_binary():
     """
     random_decimal = random.randint(0, 255)
     correct_binary = format(random_decimal, '08b')
-    print(f"\nRandom Decimal: {random_decimal}")
+    print("\n===============================")
+    print(f"Random Decimal: {random_decimal}")
     
     user_guess = input("Enter the Binary value of the decimal number: ")
     
     if user_guess == correct_binary:
-        print("Correct! The decimal was indeed", random_decimal)
+        print("\nCorrect! ✅")
         result = "Correct"
     else:
-        print(f"Wrong! The correct binary value was {correct_binary}")
+        print(f"\nIncorrect! ❌ The correct binary value was {correct_binary}")
         result = "Wrong"
     
     # Add to DataFrame
@@ -177,6 +182,7 @@ def decimal_to_binary():
     # Submenu
     print("\n1) Reset (generate another random decimal)")
     print("2) Back to main menu")
+    print("===============================")
     choice = input("Enter your choice: ")
     
     if choice == "1":
@@ -191,4 +197,4 @@ def save_results():
     subnet_guess_df.to_csv("subnet_guess.csv", index=False)
     decimal_guess_df.to_csv("decimal_guess.csv", index=False)
     binary_guess_df.to_csv("binary_guess.csv", index=False)
-    print("Results saved to 'subnet_guess.csv', 'decimal_guess.csv', and 'binary_guess.csv'")
+    print("\nResults saved to 'subnet_guess.csv', 'decimal_guess.csv', and 'binary_guess.csv'")
