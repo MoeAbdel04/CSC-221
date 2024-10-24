@@ -114,3 +114,12 @@ def subnet_question():
     
     # Print wildcard_df for debugging
     print("\nUpdated wildcard_df:")
+    print(wildcard_df)
+
+    # Submenu
+    print("\n1) Reset (ask another subnet question)")
+    print("2) Back to main menu")
+    choice = input("Enter your choice: ")
+    
+    if choice == "1":
+        subnet_question()

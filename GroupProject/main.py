@@ -3,7 +3,7 @@ from subnet_questions import subnet_question
 from save_results import save_results
 
 def main_menu():
-    """ Main menu for program """
+    """ Main menu for the program """
     while True:
         print("\nMenu:")
         print("1. Binary to Decimal Conversion")

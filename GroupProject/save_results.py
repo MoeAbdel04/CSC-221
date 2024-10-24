@@ -7,10 +7,4 @@ def save_results():
     print("\nSaving binary_guess_df to binary_guess.csv:")
     print(binary_guess_df)
     
-    print("\nSaving decimal_guess_df to decimal_guess.csv:")
-    print(decimal_guess_df)
-    
-    print("\nSaving wildcard_df to wildcard.csv:")
-    print(wildcard_df)
-    
    
