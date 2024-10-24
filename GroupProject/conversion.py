@@ -18,13 +18,13 @@ def binary_to_decimal():
         result = "Wrong"
     
     # Add to DataFrame and print the updated DataFrame
-    global decimal_guess_df
     new_row = pd.DataFrame([{
         "Random Binary": random_binary, 
         "Correct Decimal": random_decimal, 
         "Result": result
     }])
     
+    global decimal_guess_df
     decimal_guess_df = pd.concat([decimal_guess_df, new_row], ignore_index=True)
     
     # Print the DataFrame after the update
@@ -55,13 +55,13 @@ def decimal_to_binary():
         result = "Wrong"
     
     # Add to DataFrame and print the updated DataFrame
-    global binary_guess_df
     new_row = pd.DataFrame([{
         "Random Decimal": random_decimal, 
         "Correct Binary": correct_binary, 
         "Result": result
     }])
     
+    global binary_guess_df
     binary_guess_df = pd.concat([binary_guess_df, new_row], ignore_index=True)
     
     # Print the DataFrame after the update
