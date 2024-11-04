@@ -1,7 +1,7 @@
-#retrieve information from a database
-# 08/28/2024
+#Database retreival
+# 11/1/2024
 # CSC221 M5Pro
-# Sarah Houssein
+# Mahamed Abdel
 
 
 
