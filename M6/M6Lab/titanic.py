@@ -1,4 +1,7 @@
-
+# Graph plot
+# 11/15/24
+# CSC221 M6Lab
+# Mahamed Abdel
 
 
 
