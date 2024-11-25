@@ -1,4 +1,7 @@
-# File: main.py
+# Airline
+# 11/22/24
+# CSC221 M6Pro
+# Mahamed Abdel
 
 from analysis import load_data, add_sentiment, add_day_of_week, summarize_and_plot
 
