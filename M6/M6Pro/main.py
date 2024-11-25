@@ -3,6 +3,7 @@
 # CSC221 M6Pro
 # Mahamed Abdel
 
+import os
 from analysis import load_data, add_sentiment, add_day_of_week, summarize_and_plot
 
 def display_menu():
@@ -16,7 +17,14 @@ def display_menu():
     print("6. Exit")
 
 def main():
-    file_path = "Tweets(1).xlsx"  # Adjust the path to your local file location
+    # Set the file path
+    file_path = "Tweets(1).xlsx"  # Adjust this path if necessary
+    
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        print(f"Error: File '{file_path}' not found. Please ensure the file is in the correct location.")
+        return
+    
     try:
         # Load and preprocess data
         data = load_data(file_path)
