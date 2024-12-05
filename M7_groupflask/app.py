@@ -50,7 +50,8 @@ def decimal_to_binary():
 
 @app.route("/classful_analysis", methods=["GET", "POST"])
 def classful_analysis():
-    result = None
+    result = None  # Placeholder for the result message
+    ip_address = None  # Placeholder for user input on GET request
 
     if request.method == "POST":
         ip_address = request.form["ip_address"]
@@ -73,7 +74,7 @@ def classful_analysis():
             result = f"Error: {e}"
         flash(result, "info")
 
-    return render_template("classful_analysis.html", result=result)
+    return render_template("classful_analysis.html", ip_address=ip_address, result=result)
 
 @app.route("/wildcard_mask", methods=["GET", "POST"])
 def wildcard_mask():
