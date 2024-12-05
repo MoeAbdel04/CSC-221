@@ -7,8 +7,9 @@ from menu_functions import (
     save_results,
 )
 
+# Initialize Flask app
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Required for flash messages
+app.secret_key = "super_secret_key_for_session_management"  # Replace with a strong, random string
 
 @app.route("/")
 def home():
@@ -53,6 +54,7 @@ def wildcard_mask():
 @app.route("/results")
 def results():
     save_results()
+    flash("Results have been saved successfully!", "success")
     return render_template("results.html")
 
 if __name__ == "__main__":
