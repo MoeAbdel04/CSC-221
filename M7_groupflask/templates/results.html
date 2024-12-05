@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Results Saved</h2>
-<p>All game results have been successfully saved to CSV files.</p>
-<p>You can find the following files in your project directory:</p>
-<ul>
-    <li><code>binary_to_decimal_results.csv</code></li>
-    <li><code>decimal_to_binary_results.csv</code></li>
-    <li><code>classful_analysis_results.csv</code></li>
-    <li><code>wildcard_mask_results.csv</code></li>
-</ul>
-<a href="{{ url_for('home') }}">Return to Home</a>
+<h2>Results</h2>
+{% for category, entries in results.items() %}
+    <h3>{{ category.replace('_', ' ').title() }}</h3>
+    <ul>
+        {% for entry in entries %}
+            <li>
+                <strong>Question:</strong> {{ entry.question or entry.ip_with_cidr }} <br>
+                <strong>Your Answer:</strong> {{ entry.user_answer }} <br>
+                <strong>Correct Answer:</strong> {{ entry.correct_answer or 'N/A' }} <br>
+                <strong>Result:</strong> {{ entry.result }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
 {% endblock %}
