@@ -2,7 +2,9 @@
 {% block content %}
 <h2>Wildcard Mask Determination</h2>
 <p>Given the following IP address with CIDR, calculate the wildcard mask:</p>
-<h3>{{ ip_with_cidr }}</h3>
+<div class="question-box">
+    <h3>{{ ip_with_cidr }}</h3>
+</div>
 <form method="POST">
     <label for="user_answer">Your Wildcard Mask:</label>
     <input type="text" id="user_answer" name="user_answer" placeholder="e.g., 0.0.0.255" required>
@@ -10,6 +12,8 @@
 </form>
 
 {% if result %}
-    <p><strong>Result:</strong> {{ result }}</p>
+    <div class="result-box">
+        <p><strong>Result:</strong> {{ result }}</p>
+    </div>
 {% endif %}
 {% endblock %}

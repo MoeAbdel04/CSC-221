@@ -2,14 +2,18 @@
 {% block content %}
 <h2>Binary to Decimal Conversion</h2>
 <p>Convert the following binary number to a decimal:</p>
-<h3>{{ question }}</h3>
+<div class="question-box">
+    <h3>{{ question }}</h3>
+</div>
 <form method="POST">
     <label for="user_answer">Your Decimal Answer:</label>
-    <input type="text" id="user_answer" name="user_answer" required>
+    <input type="text" id="user_answer" name="user_answer" placeholder="Enter a decimal value" required>
     <button type="submit">Submit</button>
 </form>
 
 {% if result %}
-    <p><strong>Result:</strong> {{ result }}</p>
+    <div class="result-box">
+        <p><strong>Result:</strong> {{ result }}</p>
+    </div>
 {% endif %}
 {% endblock %}

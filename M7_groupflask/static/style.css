@@ -1,55 +1,83 @@
+/* General Reset */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
     color: #333;
 }
 
+/* Header */
 header {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 0;
+    padding: 15px 0;
     text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+nav {
+    margin-top: 10px;
 }
 
 nav a {
-    margin: 0 15px;
-    text-decoration: none;
     color: white;
+    text-decoration: none;
+    margin: 0 15px;
     font-weight: bold;
+    font-size: 1.2em;
 }
 
 nav a:hover {
     text-decoration: underline;
 }
 
+/* Main Content */
 main {
-    margin: 20px;
-    padding: 20px;
+    max-width: 800px;
+    margin: 30px auto;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h2, h3 {
     color: #4CAF50;
 }
 
-form label {
-    font-weight: bold;
+/* Forms */
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-form input, form button {
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input {
     padding: 10px;
-    margin-top: 10px;
+    font-size: 1em;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 form button {
     background-color: #4CAF50;
     color: white;
+    font-size: 1em;
     border: none;
-    border-radius: 4px;
+    padding: 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -57,18 +85,66 @@ form button:hover {
     background-color: #45a049;
 }
 
+/* Results Display */
 ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
 }
 
 ul li {
-    margin-bottom: 15px;
+    background: #e8f5e9;
     padding: 10px;
-    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border: 1px solid #4CAF50;
     border-radius: 5px;
 }
 
 ul li:hover {
-    background: #f9f9f9;
+    background-color: #d7efd8;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px 0;
+    background-color: #4CAF50;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+/* Question Box */
+.question-box {
+    background-color: #e8f5e9;
+    border: 1px solid #4CAF50;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Result Box */
+.result-box {
+    background-color: #ffefef;
+    border: 1px solid #f44336;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.result-box strong {
+    color: #f44336;
 }

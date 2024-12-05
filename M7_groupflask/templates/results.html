@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Results</h2>
+<p>Below are your answers and results for each activity:</p>
 {% for category, entries in results.items() %}
     <h3>{{ category.replace('_', ' ').title() }}</h3>
     <ul>
