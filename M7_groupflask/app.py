@@ -112,5 +112,6 @@ def wildcard_mask():
 def show_results():
     return render_template("results.html", results=results)
 
+
 if __name__ == "__main__":
     app.run(debug=True)
