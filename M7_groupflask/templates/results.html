@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Results Saved</h2>
+<p>All game results have been saved successfully to CSV files.</p>
+<p>You can find the following files in your project directory:</p>
+<ul>
+    <li><code>binary_to_decimal_results.csv</code></li>
+    <li><code>decimal_to_binary_results.csv</code></li>
+    <li><code>classful_analysis_results.csv</code></li>
+    <li><code>wildcard_mask_results.csv</code></li>
+</ul>
+<a href="{{ url_for('home') }}">Return to Home</a>
+{% endblock %}

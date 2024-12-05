@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Decimal to Binary Conversion</h2>
+<p>Convert the decimal number provided into an 8-bit binary number.</p>
+<form method="POST">
+    <label for="user_answer">Your Binary Answer:</label>
+    <input type="text" id="user_answer" name="user_answer" required>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

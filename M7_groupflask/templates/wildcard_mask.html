@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Wildcard Mask Determination</h2>
+<p>Based on the subnet mask provided, calculate the wildcard mask.</p>
+<form method="POST">
+    <label for="user_answer">Your Wildcard Mask:</label>
+    <input type="text" id="user_answer" name="user_answer" required>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
