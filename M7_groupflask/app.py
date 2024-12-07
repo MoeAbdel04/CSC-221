@@ -63,12 +63,11 @@ def binary_to_decimal():
 @app.route("/decimal_to_binary", methods=["GET", "POST"])
 def decimal_to_binary():
     if request.method == "GET":
-        # Generate a random decimal question and store it in the session
+        # Generate a new decimal question
         question = random.randint(0, 255)  # Generate a random decimal number
         session["decimal_question"] = question  # Save the question in the session
-        correct_answer = format(question, '08b')  # Calculate the binary equivalent
-        session["decimal_correct_answer"] = correct_answer  # Save the answer in the session
-        result = None
+        session["decimal_correct_answer"] = format(question, '08b')  # Calculate and save the correct binary answer
+        result = None  # No result to display for GET requests
     else:
         # Retrieve the stored question and correct answer from the session
         question = session.get("decimal_question")
@@ -91,7 +90,14 @@ def decimal_to_binary():
             "result": result
         })
 
+        # Generate a new question for the next GET request
+        question = random.randint(0, 255)
+        session["decimal_question"] = question
+        session["decimal_correct_answer"] = format(question, '08b')
+
+    # Render the template with the current question and result
     return render_template("decimal_to_binary.html", question=question, result=result)
+
 
 @app.route("/classful_analysis", methods=["GET", "POST"])
 def classful_analysis():
