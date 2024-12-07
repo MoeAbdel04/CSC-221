@@ -105,7 +105,7 @@ form button:hover {
     transform: scale(1.05);
 }
 
-/* Question and Result Boxes */
+/* Question Box */
 .question-box {
     background-color: #E8F5E9;
     border: 1px solid #4CAF50;
@@ -119,41 +119,40 @@ form button:hover {
     animation: fadeIn 0.8s ease-in-out;
 }
 
-.result-box {
-    background-color: #FFE9E9;
-    border: 1px solid #F44336;
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 8px;
+/* Correct Result */
+.result-correct {
+    background-color: #e6ffed; /* Light green background */
+    border: 2px solid #28a745; /* Green border */
+    color: #155724; /* Dark green text */
+    padding: 10px;
+    border-radius: 5px;
     text-align: center;
-    font-size: 1.2em;
+    margin-top: 20px;
     font-weight: bold;
-    color: #333;
-    animation: fadeIn 0.8s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.result-box strong {
-    color: #F44336;
+/* Wrong Result */
+.result-wrong {
+    background-color: #ffe6e6; /* Light red background */
+    border: 2px solid #f44336; /* Red border */
+    color: #a94442; /* Dark red text */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Animations */
+/* Animation for Results */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(-10px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 15px 0;
-    background-color: transparent;
-    color: #555;
-    font-size: 0.9em;
 }
