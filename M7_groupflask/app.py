@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request
 import random
 import ipaddress
 
 app = Flask(__name__)
-app.secret_key = "super_secret_key"
+app.secret_key = "super_secret_key_for_sessions"
 
-# Store results in memory
+# In-memory storage for results
 results = {
     "binary_to_decimal": [],
     "decimal_to_binary": [],
@@ -19,13 +19,21 @@ def home():
 
 @app.route("/binary_to_decimal", methods=["GET", "POST"])
 def binary_to_decimal():
-    question = format(random.randint(0, 255), '08b')
+    question = format(random.randint(0, 255), '08b')  # Generate an 8-bit binary question
+    correct_answer = int(question, 2)  # Compute its decimal equivalent
     result = None
 
     if request.method == "POST":
+        # Get the user's answer
         user_answer = request.form["user_answer"]
-        correct_answer = int(question, 2)
-        result = "Correct!" if user_answer.isdigit() and int(user_answer) == correct_answer else f"Wrong! Correct: {correct_answer}"
+
+        # Validate the user's answer
+        if user_answer.isdigit() and int(user_answer) == correct_answer:
+            result = "Correct!"
+        else:
+            result = f"Wrong! Correct: {correct_answer}"
+
+        # Save the result to in-memory storage
         results["binary_to_decimal"].append({
             "question": question,
             "user_answer": user_answer,
@@ -37,13 +45,21 @@ def binary_to_decimal():
 
 @app.route("/decimal_to_binary", methods=["GET", "POST"])
 def decimal_to_binary():
-    question = random.randint(0, 255)
+    question = random.randint(0, 255)  # Generate a random decimal question
+    correct_answer = format(question, '08b')  # Compute its binary equivalent
     result = None
 
     if request.method == "POST":
+        # Get the user's answer
         user_answer = request.form["user_answer"]
-        correct_answer = format(question, '08b')
-        result = "Correct!" if user_answer == correct_answer else f"Wrong! Correct: {correct_answer}"
+
+        # Validate the user's answer
+        if user_answer == correct_answer:
+            result = "Correct!"
+        else:
+            result = f"Wrong! Correct: {correct_answer}"
+
+        # Save the result to in-memory storage
         results["decimal_to_binary"].append({
             "question": question,
             "user_answer": user_answer,
@@ -59,6 +75,7 @@ def classful_analysis():
     result = None
 
     if request.method == "POST":
+        # Get the user's input
         ip_address = request.form["ip_address"]
         try:
             first_octet = int(ip_address.split('.')[0])
@@ -77,6 +94,8 @@ def classful_analysis():
             result = f"The IP address {ip_address} belongs to: {ip_class}."
         except Exception as e:
             result = f"Error: {e}"
+
+        # Save the result to in-memory storage
         results["classful_analysis"].append({
             "ip_address": ip_address,
             "result": result
@@ -89,29 +108,32 @@ def wildcard_mask():
     random_ip = f"{random.randint(0, 255)}.{random.randint(0, 255)}.{random.randint(0, 255)}.0"
     random_cidr = random.randint(8, 30)
     ip_with_cidr = f"{random_ip}/{random_cidr}"
+    correct_wildcard = str(ipaddress.ip_network(ip_with_cidr, strict=False).hostmask)
     result = None
 
     if request.method == "POST":
+        # Get the user's answer
         user_answer = request.form["user_answer"]
-        try:
-            network = ipaddress.ip_network(ip_with_cidr, strict=False)
-            correct_wildcard = str(network.hostmask)
-            result = "Correct!" if user_answer == correct_wildcard else f"Wrong! Correct: {correct_wildcard}"
-            results["wildcard_mask"].append({
-                "ip_with_cidr": ip_with_cidr,
-                "user_answer": user_answer,
-                "correct_answer": correct_wildcard,
-                "result": result
-            })
-        except ValueError as e:
-            result = f"Invalid input: {e}"
+
+        # Validate the user's answer
+        if user_answer == correct_wildcard:
+            result = "Correct!"
+        else:
+            result = f"Wrong! Correct: {correct_wildcard}"
+
+        # Save the result to in-memory storage
+        results["wildcard_mask"].append({
+            "ip_with_cidr": ip_with_cidr,
+            "user_answer": user_answer,
+            "correct_answer": correct_wildcard,
+            "result": result
+        })
 
     return render_template("wildcard_mask.html", ip_with_cidr=ip_with_cidr, result=result)
 
 @app.route("/results")
 def show_results():
     return render_template("results.html", results=results)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
