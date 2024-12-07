@@ -19,21 +19,26 @@ def home():
 
 @app.route("/binary_to_decimal", methods=["GET", "POST"])
 def binary_to_decimal():
-    question = format(random.randint(0, 255), '08b')  # Generate an 8-bit binary question
-    correct_answer = int(question, 2)  # Compute its decimal equivalent
+    # Generate an 8-bit binary string
+    question = format(random.randint(0, 255), '08b')  
+    correct_answer = int(question, 2)  # Convert binary to decimal using Python's built-in conversion
     result = None
 
     if request.method == "POST":
-        # Get the user's answer
+        # Get the user's input
         user_answer = request.form["user_answer"]
 
-        # Validate the user's answer
-        if user_answer.isdigit() and int(user_answer) == correct_answer:
-            result = "Correct!"
-        else:
-            result = f"Wrong! Correct: {correct_answer}"
+        # Validate the answer
+        try:
+            user_answer = int(user_answer)  # Convert the user's input to an integer
+            if user_answer == correct_answer:
+                result = "Correct!"
+            else:
+                result = f"Wrong! Correct: {correct_answer}"
+        except ValueError:
+            result = "Invalid input. Please enter a valid number."
 
-        # Save the result to in-memory storage
+        # Save the result for display
         results["binary_to_decimal"].append({
             "question": question,
             "user_answer": user_answer,
@@ -42,6 +47,7 @@ def binary_to_decimal():
         })
 
     return render_template("binary_to_decimal.html", question=question, result=result)
+
 
 @app.route("/decimal_to_binary", methods=["GET", "POST"])
 def decimal_to_binary():
