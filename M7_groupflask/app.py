@@ -76,6 +76,9 @@ def decimal_to_binary():
         # Get the user's answer from the form
         user_answer = request.form["user_answer"]
 
+        # Normalize user's answer to 8 bits
+        user_answer = user_answer.zfill(8)  # Add leading zeros if necessary
+
         # Validate the user's input
         if user_answer == correct_answer:
             result = "Correct!"
@@ -97,6 +100,7 @@ def decimal_to_binary():
 
     # Render the template with the current question and result
     return render_template("decimal_to_binary.html", question=question, result=result)
+
 
 
 @app.route("/classful_analysis", methods=["GET", "POST"])
