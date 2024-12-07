@@ -160,6 +160,47 @@ form button:hover {
     animation: fadeIn 0.6s ease-in-out;
 }
 
+/* Results Page */
+.results-container {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9; /* Light gray background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.results-container section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.results-container h3 {
+    color: #4CAF50;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    text-decoration: underline;
+}
+
+.results-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.results-container li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f0f8ff; /* Light blue background */
+    border-left: 4px solid #4CAF50; /* Green accent border */
+    border-radius: 5px;
+}
+
+.results-container li p {
+    margin: 5px 0;
+}
+
 /* Animation for Result Boxes */
 @keyframes fadeIn {
     from {
@@ -170,4 +211,8 @@ form button:hover {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.results-container section {
+    animation: fadeIn 0.6s ease-in-out;
 }

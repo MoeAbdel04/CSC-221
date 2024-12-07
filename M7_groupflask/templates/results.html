@@ -2,17 +2,66 @@
 {% block content %}
 <h2>Results</h2>
 <p>Below are your answers and results for each activity:</p>
-{% for category, entries in results.items() %}
-    <h3>{{ category.replace('_', ' ').title() }}</h3>
-    <ul>
-        {% for entry in entries %}
+
+<div class="results-container">
+    <section>
+        <h3>Binary To Decimal</h3>
+        <ul>
+            {% for item in results["binary_to_decimal"] %}
             <li>
-                <strong>Question:</strong> {{ entry.question or entry.ip_with_cidr }} <br>
-                <strong>Your Answer:</strong> {{ entry.user_answer }} <br>
-                <strong>Correct Answer:</strong> {{ entry.correct_answer or 'N/A' }} <br>
-                <strong>Result:</strong> {{ entry.result }}
+                <p><strong>Question:</strong> {{ item.question }}</p>
+                <p><strong>Your Answer:</strong> {{ item.user_answer }}</p>
+                <p><strong>Correct Answer:</strong> {{ item.correct_answer }}</p>
+                <p class="{% if item.result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
+                    <strong>Result:</strong> {{ item.result }}
+                </p>
             </li>
-        {% endfor %}
-    </ul>
-{% endfor %}
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Decimal To Binary</h3>
+        <ul>
+            {% for item in results["decimal_to_binary"] %}
+            <li>
+                <p><strong>Question:</strong> {{ item.question }}</p>
+                <p><strong>Your Answer:</strong> {{ item.user_answer }}</p>
+                <p><strong>Correct Answer:</strong> {{ item.correct_answer }}</p>
+                <p class="{% if item.result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
+                    <strong>Result:</strong> {{ item.result }}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Classful Analysis</h3>
+        <ul>
+            {% for item in results["classful_analysis"] %}
+            <li>
+                <p><strong>Question:</strong> {{ item.ip_address }}</p>
+                <p><strong>Result:</strong> {{ item.result }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Wildcard Mask</h3>
+        <ul>
+            {% for item in results["wildcard_mask"] %}
+            <li>
+                <p><strong>Question:</strong> {{ item.ip_with_cidr }}</p>
+                <p><strong>Your Answer:</strong> {{ item.user_answer }}</p>
+                <p><strong>Correct Answer:</strong> {{ item.correct_answer }}</p>
+                <p class="{% if item.result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
+                    <strong>Result:</strong> {{ item.result }}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
 {% endblock %}
