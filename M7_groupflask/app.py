@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import random
 import ipaddress
 
@@ -19,18 +19,24 @@ def home():
 
 @app.route("/binary_to_decimal", methods=["GET", "POST"])
 def binary_to_decimal():
-    # Generate an 8-bit binary string
-    question = format(random.randint(0, 255), '08b')  
-    correct_answer = int(question, 2)  # Convert binary to decimal using Python's built-in conversion
-    result = None
+    if request.method == "GET":
+        # Generate a new binary question and store it in the session
+        question = format(random.randint(0, 255), '08b')  # 8-bit binary
+        session["binary_question"] = question  # Save the question in the session
+        correct_answer = int(question, 2)  # Calculate the correct decimal value
+        session["binary_correct_answer"] = correct_answer  # Save the answer in the session
+        result = None  # No result yet on GET request
+    else:
+        # Retrieve the stored question and correct answer from the session
+        question = session.get("binary_question")
+        correct_answer = session.get("binary_correct_answer")
 
-    if request.method == "POST":
-        # Get the user's input
+        # Get the user's answer from the form
         user_answer = request.form["user_answer"]
 
-        # Validate the answer
+        # Validate the user's input
         try:
-            user_answer = int(user_answer)  # Convert the user's input to an integer
+            user_answer = int(user_answer)  # Convert input to integer
             if user_answer == correct_answer:
                 result = "Correct!"
             else:
@@ -38,7 +44,7 @@ def binary_to_decimal():
         except ValueError:
             result = "Invalid input. Please enter a valid number."
 
-        # Save the result for display
+        # Save the result to in-memory storage for display on the results page
         results["binary_to_decimal"].append({
             "question": question,
             "user_answer": user_answer,
@@ -46,26 +52,33 @@ def binary_to_decimal():
             "result": result
         })
 
+    # Render the template with the question and result
     return render_template("binary_to_decimal.html", question=question, result=result)
-
 
 @app.route("/decimal_to_binary", methods=["GET", "POST"])
 def decimal_to_binary():
-    question = random.randint(0, 255)  # Generate a random decimal question
-    correct_answer = format(question, '08b')  # Compute its binary equivalent
-    result = None
+    if request.method == "GET":
+        # Generate a random decimal question and store it in the session
+        question = random.randint(0, 255)  # Generate a random decimal number
+        session["decimal_question"] = question  # Save the question in the session
+        correct_answer = format(question, '08b')  # Calculate the binary equivalent
+        session["decimal_correct_answer"] = correct_answer  # Save the answer in the session
+        result = None
+    else:
+        # Retrieve the stored question and correct answer from the session
+        question = session.get("decimal_question")
+        correct_answer = session.get("decimal_correct_answer")
 
-    if request.method == "POST":
-        # Get the user's answer
+        # Get the user's answer from the form
         user_answer = request.form["user_answer"]
 
-        # Validate the user's answer
+        # Validate the user's input
         if user_answer == correct_answer:
             result = "Correct!"
         else:
             result = f"Wrong! Correct: {correct_answer}"
 
-        # Save the result to in-memory storage
+        # Save the result to in-memory storage for display on the results page
         results["decimal_to_binary"].append({
             "question": question,
             "user_answer": user_answer,
@@ -111,17 +124,24 @@ def classful_analysis():
 
 @app.route("/wildcard_mask", methods=["GET", "POST"])
 def wildcard_mask():
-    random_ip = f"{random.randint(0, 255)}.{random.randint(0, 255)}.{random.randint(0, 255)}.0"
-    random_cidr = random.randint(8, 30)
-    ip_with_cidr = f"{random_ip}/{random_cidr}"
-    correct_wildcard = str(ipaddress.ip_network(ip_with_cidr, strict=False).hostmask)
-    result = None
+    if request.method == "GET":
+        # Generate a random IP and CIDR, store it in the session
+        random_ip = f"{random.randint(0, 255)}.{random.randint(0, 255)}.{random.randint(0, 255)}.0"
+        random_cidr = random.randint(8, 30)
+        ip_with_cidr = f"{random_ip}/{random_cidr}"
+        correct_wildcard = str(ipaddress.ip_network(ip_with_cidr, strict=False).hostmask)
+        session["wildcard_ip_with_cidr"] = ip_with_cidr
+        session["wildcard_correct_answer"] = correct_wildcard
+        result = None
+    else:
+        # Retrieve the stored IP with CIDR and correct wildcard mask from the session
+        ip_with_cidr = session.get("wildcard_ip_with_cidr")
+        correct_wildcard = session.get("wildcard_correct_answer")
 
-    if request.method == "POST":
-        # Get the user's answer
+        # Get the user's answer from the form
         user_answer = request.form["user_answer"]
 
-        # Validate the user's answer
+        # Validate the user's input
         if user_answer == correct_wildcard:
             result = "Correct!"
         else:
