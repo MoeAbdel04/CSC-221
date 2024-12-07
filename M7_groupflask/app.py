@@ -20,12 +20,11 @@ def home():
 @app.route("/binary_to_decimal", methods=["GET", "POST"])
 def binary_to_decimal():
     if request.method == "GET":
-        # Generate a new binary question and store it in the session
+        # Generate a new binary question
         question = format(random.randint(0, 255), '08b')  # 8-bit binary
-        session["binary_question"] = question  # Save the question in the session
-        correct_answer = int(question, 2)  # Calculate the correct decimal value
-        session["binary_correct_answer"] = correct_answer  # Save the answer in the session
-        result = None  # No result yet on GET request
+        session["binary_question"] = question  # Save the new question in the session
+        session["binary_correct_answer"] = int(question, 2)  # Save the correct answer in the session
+        result = None  # No result to display for GET requests
     else:
         # Retrieve the stored question and correct answer from the session
         question = session.get("binary_question")
@@ -52,8 +51,14 @@ def binary_to_decimal():
             "result": result
         })
 
-    # Render the template with the question and result
+        # After a POST request, generate a new question for the next GET request
+        question = format(random.randint(0, 255), '08b')  # Generate a new question
+        session["binary_question"] = question  # Update the session with the new question
+        session["binary_correct_answer"] = int(question, 2)  # Update the session with the new correct answer
+
+    # Render the template with the current question and result
     return render_template("binary_to_decimal.html", question=question, result=result)
+
 
 @app.route("/decimal_to_binary", methods=["GET", "POST"])
 def decimal_to_binary():
