@@ -12,8 +12,9 @@
 </form>
 
 {% if result %}
-    <div class="result-box">
+    <div class="result-box {% if result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
         <p><strong>Result:</strong> {{ result }}</p>
     </div>
 {% endif %}
 {% endblock %}
+

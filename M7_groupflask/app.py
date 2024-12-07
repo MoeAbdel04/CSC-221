@@ -140,37 +140,52 @@ def classful_analysis():
 @app.route("/wildcard_mask", methods=["GET", "POST"])
 def wildcard_mask():
     if request.method == "GET":
-        # Generate a random IP and CIDR, store it in the session
+        # Generate a random IP and CIDR
         random_ip = f"{random.randint(0, 255)}.{random.randint(0, 255)}.{random.randint(0, 255)}.0"
         random_cidr = random.randint(8, 30)
         ip_with_cidr = f"{random_ip}/{random_cidr}"
+        
+        # Calculate the correct wildcard mask
         correct_wildcard = str(ipaddress.ip_network(ip_with_cidr, strict=False).hostmask)
+        
+        # Save the question and correct answer in the session
         session["wildcard_ip_with_cidr"] = ip_with_cidr
         session["wildcard_correct_answer"] = correct_wildcard
-        result = None
+        
+        result = None  # No result to display for GET requests
     else:
-        # Retrieve the stored IP with CIDR and correct wildcard mask from the session
+        # Retrieve the stored question and correct answer from the session
         ip_with_cidr = session.get("wildcard_ip_with_cidr")
         correct_wildcard = session.get("wildcard_correct_answer")
-
+        
         # Get the user's answer from the form
         user_answer = request.form["user_answer"]
-
+        
         # Validate the user's input
         if user_answer == correct_wildcard:
             result = "Correct!"
         else:
             result = f"Wrong! Correct: {correct_wildcard}"
-
-        # Save the result to in-memory storage
+        
+        # Save the result to in-memory storage for display on the results page
         results["wildcard_mask"].append({
             "ip_with_cidr": ip_with_cidr,
             "user_answer": user_answer,
             "correct_answer": correct_wildcard,
             "result": result
         })
-
+        
+        # Generate a new question for the next GET request
+        random_ip = f"{random.randint(0, 255)}.{random.randint(0, 255)}.{random.randint(0, 255)}.0"
+        random_cidr = random.randint(8, 30)
+        ip_with_cidr = f"{random_ip}/{random_cidr}"
+        correct_wildcard = str(ipaddress.ip_network(ip_with_cidr, strict=False).hostmask)
+        session["wildcard_ip_with_cidr"] = ip_with_cidr
+        session["wildcard_correct_answer"] = correct_wildcard
+    
+    # Render the template with the current question and result
     return render_template("wildcard_mask.html", ip_with_cidr=ip_with_cidr, result=result)
+
 
 @app.route("/results")
 def show_results():
