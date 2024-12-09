@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&family=Share+Tech+Mono&family=Orbitron:wght@400;600&display=swap');
+
+:root {
+    color-bg: #0a0b0e;
+    color-primary: #00fff2;
+    color-secondary: #ff00d4;
+    color-accent: #b200ff;
+    color-surface: #1a1b23;
+    color-text: #e0e0e0;
+    glow-primary: 0 0 10px rgba(0, 255, 242, 0.3);
+    glow-secondary: 0 0 15px rgba(255, 0, 212, 0.3);
+    gradient-tech: linear-gradient(120deg, 
+        var(color-primary) 0%,
+        var(color-primary) 10%,
+        var(color-secondary) 150%);
+    device-border: #333;
+    device-frame: #2a2a2a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Oxanium', sans-serif;
+    background: #000;
+    color: var(--colortext);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.deviceframe {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--deviceframe);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.5),
+        0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--deviceborder);
+    position: relative;
+}
+
+.devicescreen {
+    background: var(--colorbg);
+    border-radius: 10px;
+    padding: 20px;
+    border: 2px solid var(--colorprimary);
+    box-shadow: 
+        0 0 10px var(--colorprimary),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.statuslights {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    display: flex;
+    gap: 10px;
+    z-index: 1;
+}
+
+.statuslight {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--colorprimary);
+    animation: blink 2s infinite;
+}
+
+.statuslight:nth-child(2) {
+    animation-delay: 0.5s;
+    background: var(--colorsecondary);
+}
+
+.statuslight:nth-child(3) {
+    animation-delay: 1s;
+    background: var(--coloraccent);
+}
+
+nav {
+    background: rgba(26, 27, 35, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 255, 242, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+    border-radius: 8px 8px 0 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+nav a {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--colortext);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradienttech);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::before {
+    width: 100%;
+}
+
+nav a:hover {
+    color: var(--colorsecondary);
+    text-shadow: 0 0 8px rgba(255, 0, 212, 0.5);
+}
+
+main {
+    min-height: calc(100vh - 180px);
+    padding: 2rem 0;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    background: linear-gradient(
+        145deg, 
+        var(--colorsurface),
+        rgba(26, 27, 35, 0.8)
+    );
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(0, 255, 242, 0.1);
+    box-shadow: 0 4px 20px rgba(255, 0, 212, 0.1);
+    animation: cardAppear 0.5s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%, 
+        rgba(0, 255, 242, 0.015) 50%,
+        rgba(0, 255, 242, 0.015) 51%,
+        transparent 51%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1;
+    animation: scanLine 10s linear infinite;
+}
+
+.tcorner {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.tcorner.tl {
+    top: 0;
+    left: 0;
+    border-top: 2px solid var(--colorprimary);
+    border-left: 2px solid var(--colorprimary);
+}
+
+.tcorner.tr {
+    top: 0;
+    right: 0;
+    border-top: 2px solid var(--colorsecondary);
+    border-right: 2px solid var(--colorsecondary);
+}
+
+.card:hover .tcorner {
+    width: 70px;
+    height: 70px;
+    opacity: 0.8;
+}
+
+.cardheader {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 255, 242, 0.2);
+}
+
+.cardcontent {
+    padding: 1rem;
+}
+
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+    background: var(--gradienttech);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    width: 100%;
+    background-size: 200% auto;
+    position: relative;
+    z-index: 2;
+}
+
+.formgroup {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--colorprimary);
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 255, 242, 0.2);
+    border-radius: 4px;
+    color: var(--colortext);
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--colorsecondary);
+    box-shadow: var(--glowsecondary);
+}
+
+button {
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid var(--colorprimary);
+    color: var(--colortext);
+    font-family: 'Share Tech Mono', monospace;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 0, 212, 0.3),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    background: var(--gradienttech);
+    border-color: transparent;
+    box-shadow: var(--glowsecondary);
+    transform: translateY(-2px);
+    color: #000;
+    font-weight: 600;
+}
+
+.resultsection {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 242, 0.1);
+}
+
+.resultentry {
+    padding: 1rem;
+    background: rgba(26, 27, 35, 0.9);
+    border-left: 3px solid var(--colorsecondary);
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.resultentry strong {
+    color: var(--colorprimary);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.resultline {
+    margin-bottom: 0.5rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--colortext);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(0, 255, 242, 0.1);
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scanLine {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 12px;
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .deviceframe {
+        padding: 10px;
+    }
+
+    .devicescreen {
+        padding: 10px;
+    }
+
+    nav .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+        margin: 0.25rem 0;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .card {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .tcorner {
+        display: none;
+    }
+
+    .statuslights {
+        top: 5px;
+        right: 10px;
+    }
+}

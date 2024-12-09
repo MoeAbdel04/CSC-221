@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="cardheader">
+    <h2>Binary to Decimal Conversion</h2>
+</div>
+
+<div class="cardcontent">
+    <form method="POST">
+        <div class="formgroup">
+            <label for="binary">Binary Number:</label>
+            <input type="text" id="binary" name="user_answer" required pattern="[01]+" 
+                   placeholder="Enter binary number (e.g., 10101010)"
+                   value="{{ question if question }}">
+        </div>
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+    <div class="resultsection">
+        <div class="resultentry">
+            <div class="resultline">
+                <strong>Result:</strong> {{ result }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

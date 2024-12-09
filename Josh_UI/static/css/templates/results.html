@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+<div class="cardheader">
+    <h2>Results</h2>
+</div>
+
+<div class="cardcontent">
+    {% for category, entries in results.items() %}
+    <div class="resultsection">
+        <h3>{{ category.replace('_', ' ').title() }}</h3>
+        
+        {% for entry in entries %}
+        <div class="resultentry">
+            <div class="resultline">
+                <strong>Question:</strong> 
+                {{ entry.question or entry.ip_with_cidr }}
+            </div>
+
+            <div class="resultline">
+                <strong>Your Answer:</strong> 
+                {{ entry.user_answer }}
+            </div>
+
+            <div class="resultline">
+                <strong>Correct Answer:</strong> 
+                {{ entry.correct_answer }}
+            </div>
+
+            <div class="resultline">
+                <strong>Result:</strong> 
+                <span class="resultstatus {{ 'text-cyan-400' if entry.result == 'Correct' else 'text-pink-500' }}">
+                    {{ entry.result }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

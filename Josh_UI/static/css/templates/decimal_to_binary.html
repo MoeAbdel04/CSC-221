@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="cardheader">
+    <h2>Decimal to Binary Conversion</h2>
+</div>
+
+<div class="cardcontent">
+    <form method="POST">
+        <div class="formgroup">
+            <label for="decimal">Decimal Number:</label>
+            <input type="number" id="decimal" name="user_answer" required 
+                   min="0" max="255" 
+                   placeholder="Enter decimal number (0-255)"
+                   value="{{ question if question }}">
+        </div>
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+    <div class="resultsection">
+        <div class="resultentry">
+            <div class="resultline">
+                <strong>Result:</strong> {{ result }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
