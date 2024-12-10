@@ -1,67 +1,66 @@
-{% extends "base.html" %}
-{% block content %}
-<h2>Results</h2>
-<p>Below are your answers and results for each activity:</p>
-
-<div class="results-container">
-    <section>
-        <h3>Binary To Decimal</h3>
-        <ul>
-            {% for item in results["binary_to_decimal"] %}
-            <li>
-                <p><strong>Question:</strong> {{ item.question }}</p>
-                <p><strong>Your Answer:</strong> {{ item.user_answer }}</p>
-                <p><strong>Correct Answer:</strong> {{ item.correct_answer }}</p>
-                <p class="{% if item.result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
-                    <strong>Result:</strong> {{ item.result }}
-                </p>
-            </li>
-            {% endfor %}
-        </ul>
-    </section>
-
-    <section>
-        <h3>Decimal To Binary</h3>
-        <ul>
-            {% for item in results["decimal_to_binary"] %}
-            <li>
-                <p><strong>Question:</strong> {{ item.question }}</p>
-                <p><strong>Your Answer:</strong> {{ item.user_answer }}</p>
-                <p><strong>Correct Answer:</strong> {{ item.correct_answer }}</p>
-                <p class="{% if item.result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
-                    <strong>Result:</strong> {{ item.result }}
-                </p>
-            </li>
-            {% endfor %}
-        </ul>
-    </section>
-
-    <section>
-        <h3>Classful Analysis</h3>
-        <ul>
-            {% for item in results["classful_analysis"] %}
-            <li>
-                <p><strong>Question:</strong> {{ item.ip_address }}</p>
-                <p><strong>Result:</strong> {{ item.result }}</p>
-            </li>
-            {% endfor %}
-        </ul>
-    </section>
-
-    <section>
-        <h3>Wildcard Mask</h3>
-        <ul>
-            {% for item in results["wildcard_mask"] %}
-            <li>
-                <p><strong>Question:</strong> {{ item.ip_with_cidr }}</p>
-                <p><strong>Your Answer:</strong> {{ item.user_answer }}</p>
-                <p><strong>Correct Answer:</strong> {{ item.correct_answer }}</p>
-                <p class="{% if item.result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
-                    <strong>Result:</strong> {{ item.result }}
-                </p>
-            </li>
-            {% endfor %}
-        </ul>
-    </section>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Network Tools</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('binary_to_decimal') }}">Binary to Decimal</a>
+            <a href="{{ url_for('decimal_to_binary') }}">Decimal to Binary</a>
+            <a href="{{ url_for('classful_analysis') }}">Classful Analysis</a>
+            <a href="{{ url_for('wildcard_mask') }}">Wildcard Mask</a>
+            <a href="{{ url_for('results') }}" class="active">View Results</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Results</h2>
+        <div class="results-container">
+            <section>
+                <h3>Binary to Decimal</h3>
+                <ul>
+                    {% for result in results_data.binary_to_decimal %}
+                    <li>
+                        <p><strong>Question:</strong> {{ result.question }}</p>
+                        <p><strong>Your Answer:</strong> {{ result.user_answer }}</p>
+                        <p><strong>Correct Answer:</strong> {{ result.correct_answer }}</p>
+                        <p><strong>Result:</strong> {{ result.result }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section>
+                <h3>Decimal to Binary</h3>
+                <ul>
+                    {% for result in results_data.decimal_to_binary %}
+                    <li>
+                        <p><strong>Question:</strong> {{ result.question }}</p>
+                        <p><strong>Your Answer:</strong> {{ result.user_answer }}</p>
+                        <p><strong>Correct Answer:</strong> {{ result.correct_answer }}</p>
+                        <p><strong>Result:</strong> {{ result.result }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section>
+                <h3>Wildcard Mask</h3>
+                <ul>
+                    {% for result in results_data.wildcard_mask %}
+                    <li>
+                        <p><strong>Question:</strong> {{ result.question }}</p>
+                        <p><strong>Your Answer:</strong> {{ result.user_answer }}</p>
+                        <p><strong>Correct Answer:</strong> {{ result.correct_answer }}</p>
+                        <p><strong>Result:</strong> {{ result.result }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

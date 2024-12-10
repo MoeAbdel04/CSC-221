@@ -1,12 +1,33 @@
-{% extends "base.html" %}
-{% block content %}
-<h2>Welcome to Network Tools</h2>
-<p>Explore the tools below to practice networking concepts:</p>
-<ul>
-    <li><a href="{{ url_for('binary_to_decimal') }}">Binary to Decimal Conversion</a></li>
-    <li><a href="{{ url_for('decimal_to_binary') }}">Decimal to Binary Conversion</a></li>
-    <li><a href="{{ url_for('classful_analysis') }}">Classful Address Analysis</a></li>
-    <li><a href="{{ url_for('wildcard_mask') }}">Wildcard Mask Determination</a></li>
-    <li><a href="{{ url_for('show_results') }}">View Results</a></li>
-</ul>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Tools</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Network Tools</h1>
+        <nav>
+            <a href="{{ url_for('home') }}" class="active">Home</a>
+            <a href="{{ url_for('binary_to_decimal') }}">Binary to Decimal</a>
+            <a href="{{ url_for('decimal_to_binary') }}">Decimal to Binary</a>
+            <a href="{{ url_for('classful_analysis') }}">Classful Analysis</a>
+            <a href="{{ url_for('wildcard_mask') }}">Wildcard Mask</a>
+            <a href="{{ url_for('results') }}">View Results</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Welcome to Network Tools</h2>
+        <p>Explore the tools below to practice networking concepts:</p>
+        <ul>
+            <li><a href="{{ url_for('binary_to_decimal') }}">Binary to Decimal Conversion</a></li>
+            <li><a href="{{ url_for('decimal_to_binary') }}">Decimal to Binary Conversion</a></li>
+            <li><a href="{{ url_for('classful_analysis') }}">Classful Address Analysis</a></li>
+            <li><a href="{{ url_for('wildcard_mask') }}">Wildcard Mask Determination</a></li>
+            <li><a href="{{ url_for('results') }}">View Results</a></li>
+        </ul>
+    </main>
+</body>
+</html>
