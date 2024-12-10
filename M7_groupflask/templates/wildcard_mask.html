@@ -1,45 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wildcard Mask</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Network Tools</h1>
-        <nav>
-            <a href="{{ url_for('home') }}">Home</a>
-            <a href="{{ url_for('binary_to_decimal') }}">Binary to Decimal</a>
-            <a href="{{ url_for('decimal_to_binary') }}">Decimal to Binary</a>
-            <a href="{{ url_for('classful_analysis') }}">Classful Analysis</a>
-            <a href="{{ url_for('wildcard_mask') }}" class="active">Wildcard Mask</a>
-            <a href="{{ url_for('results') }}">View Results</a>
-        </nav>
-    </header>
-    <main>
-        <h2>Wildcard Mask Determination</h2>
-        <div class="question-box">{{ question }}</div>
-        <form method="POST">
-            <label for="wildcard-answer">Your Wildcard Mask Answer:</label>
-            <input type="text" name="wildcard-answer" id="wildcard-answer" placeholder="Enter a wildcard mask (e.g., 0.0.0.255)">
-            <button type="submit" class="submit-btn">Submit</button>
-        </form>
+{% extends "base.html" %}
+{% block content %}
+<h2>Wildcard Mask Determination</h2>
+<p>Given the following IP address with CIDR, calculate the wildcard mask:</p>
+<div class="question-box">
+    <h3>{{ ip_with_cidr }}</h3>
+</div>
+<form method="POST">
+    <label for="user_answer">Your Wildcard Mask:</label>
+    <input type="text" id="user_answer" name="user_answer" placeholder="e.g., 0.0.0.255" required>
+    <button type="submit">Submit</button>
+</form>
 
-        {% if result %}
-        <div class="result-box {{ 'correct' if result == 'Correct!' else 'wrong' }}">
-            Result: {{ result }}
-        </div>
-        {% endif %}
+{% if result %}
+    <div class="result-box {% if result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
+        <p><strong>Result:</strong> {{ result }}</p>
+    </div>
+{% endif %}
+{% endblock %}
 
-        {% if attempts_left is not none %}
-        <div class="attempts-box">
-            Attempts Remaining: {{ attempts_left }}
-        </div>
-        {% endif %}
-
-        <a href="{{ url_for('home') }}" class="back-link">Back to Home</a>
-    </main>
-</body>
-</html>

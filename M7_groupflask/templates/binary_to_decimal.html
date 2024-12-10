@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binary to Decimal</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Network Tools</h1>
-        <nav>
-            <a href="{{ url_for('home') }}">Home</a>
-            <a href="{{ url_for('binary_to_decimal') }}" class="active">Binary to Decimal</a>
-            <a href="{{ url_for('decimal_to_binary') }}">Decimal to Binary</a>
-            <a href="{{ url_for('classful_analysis') }}">Classful Analysis</a>
-            <a href="{{ url_for('wildcard_mask') }}">Wildcard Mask</a>
-            <a href="{{ url_for('results') }}">View Results</a>
-        </nav>
-    </header>
-    <main>
-        <h2>Binary to Decimal Conversion</h2>
-        <div class="question-box">{{ question }}</div>
-        <form method="POST">
-            <label for="decimal-answer">Your Decimal Answer:</label>
-            <input type="text" name="decimal-answer" id="decimal-answer" placeholder="Enter a decimal value">
-            <button type="submit" class="submit-btn">Submit</button>
-        </form>
+{% extends "base.html" %}
+{% block content %}
+<h2>Binary to Decimal Conversion</h2>
+<p>Convert the following binary number to a decimal:</p>
+<div class="question-box">
+    <h3>{{ question }}</h3>
+</div>
+<form method="POST">
+    <label for="user_answer">Your Decimal Answer:</label>
+    <input type="text" id="user_answer" name="user_answer" placeholder="Enter a decimal value" required>
+    <button type="submit">Submit</button>
+</form>
 
-        {% if result %}
-        <div class="result-box {{ 'correct' if result == 'Correct!' else 'wrong' }}">
-            Result: {{ result }}
-        </div>
-        {% endif %}
-
-        {% if attempts_left is not none %}
-        <div class="attempts-box">
-            Attempts Remaining: {{ attempts_left }}
-        </div>
-        {% endif %}
-
-        <a href="{{ url_for('home') }}" class="back-link">Back to Home</a>
-    </main>
-</body>
-</html>
+{% if result %}
+    <div class="result-box {% if result == 'Correct!' %}result-correct{% else %}result-wrong{% endif %}">
+        <p><strong>Result:</strong> {{ result }}</p>
+    </div>
+{% endif %}
+{% endblock %}
