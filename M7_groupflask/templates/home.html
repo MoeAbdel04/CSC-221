@@ -10,23 +10,20 @@
     <header>
         <h1>Network Tools</h1>
         <nav>
-            <a href="{{ url_for('home') }}" class="active">Home</a>
             <a href="{{ url_for('binary_to_decimal') }}">Binary to Decimal</a>
             <a href="{{ url_for('decimal_to_binary') }}">Decimal to Binary</a>
-            <a href="{{ url_for('classful_analysis') }}">Classful Analysis</a>
             <a href="{{ url_for('wildcard_mask') }}">Wildcard Mask</a>
-            <a href="{{ url_for('results') }}">View Results</a>
+            <a href="{{ url_for('classful_analysis') }}">Classful Address Analysis</a>
         </nav>
     </header>
     <main>
         <h2>Welcome to Network Tools</h2>
-        <p>Explore the tools below to practice networking concepts:</p>
+        <p>Select a tool below to begin:</p>
         <ul>
             <li><a href="{{ url_for('binary_to_decimal') }}">Binary to Decimal Conversion</a></li>
             <li><a href="{{ url_for('decimal_to_binary') }}">Decimal to Binary Conversion</a></li>
-            <li><a href="{{ url_for('classful_analysis') }}">Classful Address Analysis</a></li>
             <li><a href="{{ url_for('wildcard_mask') }}">Wildcard Mask Determination</a></li>
-            <li><a href="{{ url_for('results') }}">View Results</a></li>
+            <li><a href="{{ url_for('classful_analysis') }}">Classful Address Analysis</a></li>
         </ul>
     </main>
 </body>
