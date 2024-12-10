@@ -201,6 +201,19 @@ form button:hover {
     margin: 5px 0;
 }
 
+/* Attempts Box */
+.attempts-box {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
 /* Animation for Result Boxes */
 @keyframes fadeIn {
     from {
